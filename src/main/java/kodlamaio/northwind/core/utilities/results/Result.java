@@ -18,7 +18,7 @@ public class Result { // super type
 		return this.success;
 	}
 	
-	public String message() {
+	public String getMessage() {
 		return this.message;
 	}
 	
