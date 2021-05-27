@@ -1,6 +1,7 @@
 package kodlamaio.northwind.dataAccess.abstracts;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import kodlamaio.northwind.entities.concretes.Product;
 
@@ -13,6 +14,9 @@ import kodlamaio.northwind.entities.concretes.Product;
 //Burda bir JpaRepository extensionu vasitesi ile aslinda hansi entity-e(tabloya) , hansi id veri tipi ile sorgulanir hazirlamasi gerekdiyini repositorye demis oluruq
 
 // Generic olaraq isleyir arxaplanda menim verdiyim deyerlere gore, arxaplanda spring bir repository classi yaradir(qisacasi bir instance yaradir)
+
+// Repository database birbasa elcatan bir DAO(Data Access Object)du. Repository database el
+@Repository
 public interface ProductDao extends JpaRepository<Product, Integer> {
 
 }
