@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import kodlamaio.northwind.entities.concretes.Product;
+import kodlamaio.northwind.entities.dtos.ProductWithCategoryDto;
 
 //ProductDao yerine ProductRepository olaraq gore bilerem, JpaRepositorya gore bele adlanir
 
@@ -36,4 +37,16 @@ public interface ProductDao extends JpaRepository<Product, Integer> {
 	
 	@Query("From Product where productName=:productName and category.categoryId=:categoryId") //database tablosunu unut , =: atiyir paramslari
 	List<Product> getByProductAndCategory(String productName, int categoryId);
+	
+	@Query("Select new kodlamaio.northwind.entities.dtos.ProductWithCategoryDto(p.id, p.productName, c.categoryName) From Category c Inner Join c.products p")
+	List<ProductWithCategoryDto> getProductWithCategoryDetails();
+	
+	// select p.productId, p.productName, c.categoryName from Category c inner join Product p
+	// on c.categoryId = p.categoryId
+	
+	// JPQL de hemise base tablodan getmek lazimdi, SQLde sixinti olmaz, JPQL biraz ugrasdirar
+	
+	// From tum alanlari getirir select secdiklerimi getirir
+	
+	// join columnlari var deye
 }

@@ -10,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-
 import kodlamaio.northwind.business.abstracts.ProductService;
 import kodlamaio.northwind.core.utilities.results.DataResult;
 import kodlamaio.northwind.core.utilities.results.Result;
@@ -18,6 +17,7 @@ import kodlamaio.northwind.core.utilities.results.SuccessDataResult;
 import kodlamaio.northwind.core.utilities.results.SuccessResult;
 import kodlamaio.northwind.dataAccess.abstracts.ProductDao;
 import kodlamaio.northwind.entities.concretes.Product;
+import kodlamaio.northwind.entities.dtos.ProductWithCategoryDto;
 
 @Service // bu class projede service misyasini yerine yeterecek
 public class ProductManager implements ProductService {
@@ -54,13 +54,14 @@ public class ProductManager implements ProductService {
 
 	@Override
 	public DataResult<Product> getByProductNameAndCategoryId(String productName, int categoryId) {
-		return new SuccessDataResult<Product>(this.productDao.getByProductNameAndCategory_CategoryId(productName, categoryId),
-				"Data Listelendi");
+		return new SuccessDataResult<Product>(
+				this.productDao.getByProductNameAndCategory_CategoryId(productName, categoryId), "Data Listelendi");
 	}
 
 	@Override
 	public DataResult<List<Product>> getByProductNameOrCategoryId(String productName, int categoryId) {
-		return new SuccessDataResult<List<Product>>(this.productDao.getByProductNameOrCategory_CategoryId(productName, categoryId), "Data Listelendi");
+		return new SuccessDataResult<List<Product>>(
+				this.productDao.getByProductNameOrCategory_CategoryId(productName, categoryId), "Data Listelendi");
 	}
 
 	@Override
@@ -70,31 +71,41 @@ public class ProductManager implements ProductService {
 
 	@Override
 	public DataResult<List<Product>> getByProductNameContains(String productName) {
-		return new SuccessDataResult<List<Product>>(this.productDao.getByProductNameContains(productName), "Data Listelendi");
+		return new SuccessDataResult<List<Product>>(this.productDao.getByProductNameContains(productName),
+				"Data Listelendi");
 	}
 
 	@Override
 	public DataResult<List<Product>> getByProductNameStartsWith(String productName) {
-		return new SuccessDataResult<List<Product>>(this.productDao.getByProductNameStartsWith(productName), "Data Listelendi");
+		return new SuccessDataResult<List<Product>>(this.productDao.getByProductNameStartsWith(productName),
+				"Data Listelendi");
 	}
 
 	@Override
 	public DataResult<List<Product>> getByProductAndCategory(String productName, int categoryId) {
-		return new SuccessDataResult<List<Product>>(this.productDao.getByProductAndCategory(productName, categoryId), "Data Listelendi");
+		return new SuccessDataResult<List<Product>>(this.productDao.getByProductAndCategory(productName, categoryId),
+				"Data Listelendi");
 	}
 
 	@Override
 	public DataResult<List<Product>> getAll(int pageNo, int pageSize) {
-		
+
 		Pageable pageable = PageRequest.of(pageNo - 1, pageSize); // sayma 0dan baslayir
-		
+
 		return new SuccessDataResult<List<Product>>(this.productDao.findAll(pageable).getContent());
 	}
 
 	@Override
 	public DataResult<List<Product>> getAllSorted() {
-		Sort sort = Sort.by(Sort.Direction.DESC, "productName"); // siralam asc + , desc - , 2ci param hansi field gore getirilsin
-		return new SuccessDataResult<List<Product>>(this.productDao.findAll(sort)) ;
+		Sort sort = Sort.by(Sort.Direction.DESC, "productName"); // siralam asc + , desc - , 2ci param hansi field gore
+																	// getirilsin
+		return new SuccessDataResult<List<Product>>(this.productDao.findAll(sort));
+	}
+
+	@Override
+	public DataResult<List<ProductWithCategoryDto>> getProductWithCategoryDetails() {
+		return new SuccessDataResult<List<ProductWithCategoryDto>>(this.productDao.getProductWithCategoryDetails(),
+				"Data Listelendi");
 	}
 
 }

@@ -27,4 +27,8 @@ public class NorthwindApplication {
     }
     
     // end point istek yapilan yer -> api/products/getall
+    
+    // Spring Boot code firstdi codelari yazdigimiz an database yaranir 
+    
+    
 }
