@@ -29,7 +29,7 @@ public class ProductsController {
 		super();
 		this.productService = productService;
 	}
-	
+	   
 	@GetMapping("/getall") // http get request
 	public DataResult<List<Product>> getAll() {
 		return this.productService.getAll();
